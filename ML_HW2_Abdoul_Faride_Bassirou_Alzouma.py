@@ -40,3 +40,8 @@ regularization_param = 0.1
 
 W,b = training_func(X_train,y_train,learning_rate,n_iterations,regularization_param)
 
+def predicition_func(X,W,b):
+	z = np.dot(X,W) + b
+	A = 1 / (1+np.exp(-z))
+	return (A > 0.5).astype(int)
+
