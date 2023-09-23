@@ -34,3 +34,9 @@ def training_func(X,y,learning_rate,iterations,reg_parameter):
 		b -= learning_rate*db
 	return W,b
 
+learning_rate = 0.01
+n_iterations = 1000
+regularization_param = 0.1
+
+W,b = training_func(X_train,y_train,learning_rate,n_iterations,regularization_param)
+
