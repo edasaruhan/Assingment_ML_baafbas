@@ -40,8 +40,19 @@ regularization_param = 0.1
 
 W,b = training_func(X_train,y_train,learning_rate,n_iterations,regularization_param)
 
-def predicition_func(X,W,b):
+def prediction_func(X,W,b):
 	z = np.dot(X,W) + b
 	A = 1 / (1+np.exp(-z))
 	return (A > 0.5).astype(int)
+
+y_pred = prediction_func(X_test,W,b)
+
+accuracy = accuracy_score(y_test, y_pred)
+confusion = confusion_matrix(y_test, y_pred)
+classification_rep = classification_report(y_test, y_pred)
+
+
+print("Accuracy:", accuracy)
+print("Confusion Matrix:\n", confusion)
+print("Classification Report:\n", classification_rep)
 
