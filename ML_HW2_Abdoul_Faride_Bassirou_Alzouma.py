@@ -6,5 +6,8 @@ from sklearn.metrics import accuracy_score,confusion_matrix,classification_repor
 
 iris = load_iris()
 X = iris.data
-y = iris.target 
+y = iris.target
+
+y_binary = np.where(y==0,1,0)
+
 
