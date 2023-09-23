@@ -11,3 +11,9 @@ y = iris.target
 y_binary = np.where(y==0,1,0)
 
 
+X_train, X_test, y_train, y_test = train_test_split(X, y_binary, test_size=0.2, random_state=42)
+
+def cost_func(y_true,y_pred):
+	epsilon = 1e-15
+	y_pred = np.clip(y_pred,epsilon,1-epsilon)
+	return - (y_true*np.log(y_pred)+(1-y_true)*np.log(1-y_pred))
