@@ -33,3 +33,15 @@ model = keras.Sequential([
 	CustomDenseLayer(64,activation=tf.nn.relu)
 	CustomDenseLayer(10,activation=tf.nn.softmax)
 	])
+
+def custom_sparse_categorical_crossentropy(y_true,y_pred):
+	neg_log_prob = -tf.reduce_sum(y_true*tf.math.log(y_pred),axis=-1)
+	return tf.reduce_mean(neg_log_prob)
+
+
+def custom_accuracy(y_true,y_pred):
+	correct_predictions = tf.equal(tf.argmax(y_true,axis=-1),tf.argmax(y_pred,axis=-1))
+	accuracy = tf.reduce_mean(tf.cast(correct_predictions,tf.float32))
+	return accuracy 
+
+model.compile(optimizer=)
