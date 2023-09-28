@@ -26,3 +26,10 @@ class CustomDenseLayer(layers.Layer):
 		if self.activation is not None:
 			output = self.activation(output)
 		return output
+
+model = keras.Sequential([
+	layers.Flatten(input_shape(28,28)),
+	CustomDenseLayer(128,activation=tf.nn.relu)
+	CustomDenseLayer(64,activation=tf.nn.relu)
+	CustomDenseLayer(10,activation=tf.nn.softmax)
+	])
