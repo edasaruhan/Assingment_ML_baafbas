@@ -51,3 +51,5 @@ model.fit(train_images,train_labels,epochs = 10,batch_size=32)
 test_loss,test_accuracy = model.evaluate(test_images,test_labels)
 
 print(f"Test accuracy : {test_accuracy*100:.2f}%")
+
+# Abdoul Faride Bassirou Alzouma
