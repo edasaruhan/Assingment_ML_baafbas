@@ -19,7 +19,7 @@ class CustomDenseLayer(layers.Layer):
 
 	def build(self,input_shape):
 		self.kernel = self.add_weight("kernel",(input_shape[-1],self.units))
-		self.bias = self.add_weight("bias",(self.units))
+		self.bias = self.add_weight("bias",(self.units,))
 
 	def call(self,inputs):
 		output = tf.matmul(inputs,self.kernel) + self.bias
@@ -28,9 +28,9 @@ class CustomDenseLayer(layers.Layer):
 		return output
 
 model = keras.Sequential([
-	layers.Flatten(input_shape(28,28)),
-	CustomDenseLayer(128,activation=tf.nn.relu)
-	CustomDenseLayer(64,activation=tf.nn.relu)
+	layers.Flatten(input_shape=(28,28)),
+	CustomDenseLayer(128,activation=tf.nn.relu),
+	CustomDenseLayer(64,activation=tf.nn.relu),
 	CustomDenseLayer(10,activation=tf.nn.softmax)
 	])
 
@@ -44,4 +44,10 @@ def custom_accuracy(y_true,y_pred):
 	accuracy = tf.reduce_mean(tf.cast(correct_predictions,tf.float32))
 	return accuracy 
 
-model.compile(optimizer=)
+model.compile(optimizer='adam',loss=custom_sparse_categorical_crossentropy,metrics=[custom_accuracy])
+
+model.fit(train_images,train_labels,epochs = 10,batch_size=32)
+
+test_loss,test_accuracy = model.evaluate(test_images,test_labels)
+
+print(f"Test accuracy : {test_accuracy*100:.2f}%")
